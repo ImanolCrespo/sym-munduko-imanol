@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Actividades index{% endblock %}
+
+{% block body %}
+    <h1>Actividades index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Grupo</th>
+                <th>Foto</th>
+                <th>Fecha</th>
+                <th>Ubicacion</th>
+                <th>Descripcion</th>
+                <th>Precio</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for actividade in actividades %}
+            <tr>
+                <td>{{ actividade.id }}</td>
+                <td>{{ actividade.nombre }}</td>
+                <td>{{ actividade.grupo }}</td>
+                <td>{{ actividade.foto }}</td>
+                <td>{{ actividade.fecha ? actividade.fecha|date('Y-m-d') : '' }}</td>
+                <td>{{ actividade.ubicacion }}</td>
+                <td>{{ actividade.descripcion }}</td>
+                <td>{{ actividade.precio }}</td>
+                <td>
+                    <a href="{{ path('actividades_show', {'id': actividade.id}) }}">show</a>
+                    <a href="{{ path('actividades_edit', {'id': actividade.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('actividades_new') }}">Create new</a>
+{% endblock %}
